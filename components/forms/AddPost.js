@@ -1,21 +1,33 @@
 import { useState } from "react"
+import {
+    gql,
+    useMutation
+} from "@apollo/client"
+import {
+    Row, 
+    Col,
+    Modal
+} from "react-bootstrap"
 
 function AddPost() {
-    const [thePost, setThePost] = useState({})
+    const [thePost, setThePost] = useState({
+        author: "61dce5d32474905b51e7e608",
+        img: null
+    })
 
     const onChangeHandler = (e) => {
         setThePost({...thePost, [e.target.name]: e.target.value})
     }
 
     const photoHandler = (e) => {
-        setThePost({...thePost, thePost: e.target.file[0]})
+        setThePost({...thePost, img: e.target.files[0]})
     }
 
     const ADD_POST = gql`
         mutation addPost(
             $post: String!, 
-            $author: Schema.Types.ObjectId!, 
-            $img: [String!],
+            $author: String!, 
+            $img: Upload,
             ) {
             addPost(thePost: {
                 post: $post,
@@ -24,7 +36,6 @@ function AddPost() {
             }) {
                 post
                 author
-                img
             }
         }
     `
@@ -39,21 +50,20 @@ function AddPost() {
     }
 
     return (
-        <form onSubmit={onSubmitHandler}>
-            <div>
-                <label>Post</label>
-                <input type="text" name="post" onChange={onChangeHandler} />
-            </div>
-            <div>
-                <label>Post</label>
-                <input type="text" name="post" onChange={onChangeHandler} />
-            </div>
-            <div>
-                <label>Image</label>
-                <input type="file" onChange={photoHandler}/>
-            </div>
-            <button>Submit</button>
-        </form>
+        <Row>
+            <form onSubmit={onSubmitHandler}>
+                {JSON.stringify(thePost)}
+                <div>
+                    <label>Post</label>
+                    <input type="text" name="post" onChange={onChangeHandler} />
+                </div>
+                <div>
+                    <label>Image</label>
+                    <input type="file" onChange={photoHandler}/>
+                </div>
+                <button className="custom_btn_1">Submit</button>
+            </form>
+        </Row>
     )
 }
 

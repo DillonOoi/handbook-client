@@ -1,0 +1,15 @@
+/* CENTERING CONTAINER */
+.center_everything {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+/* RESIZING LANDING LOGO */
+.landing_logo {
+    height: 70px;
+    margin-right: 10px;
+    padding-bottom: 5px;
+}
