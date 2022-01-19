@@ -1,0 +1,86 @@
+/* FRIENDS' LIST */
+.friends_list {
+    position: fixed;
+    right: 0;
+}
+
+.friends_scroll {
+    /* border-left: 3px solid var(--dimgray); */
+    /* padding-left: 2em; */
+    overflow-y: scroll;
+    height: 82vh;
+}
+
+
+/* MEDIA QUERY */
+/* @media only screen and (max-width: 1520px) {
+    .addpost_btn {
+        padding: 10px 60% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .addpost_btn {
+        padding: 10px 50% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 1026px) {
+    .addpost_btn {
+        padding: 10px 40% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 968px) {
+    .addpost_btn {
+        padding: 10px 30% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 834px) {
+    .addpost_btn {
+        padding: 10px 20% 10px 20px;
+    }
+} */
+
+@media only screen and (max-width: 767px) {
+    .friends_list {
+        display: none;
+    }
+    
+    /* .addpost_btn {
+        padding: 10px 40% 10px 20px;
+    } */
+}
+
+/* @media only screen and (max-width: 645px) {
+    .addpost_btn {
+        padding: 10px 30% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 556px) {
+    .addpost_btn {
+        padding: 10px 20% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 489px) {
+    .addpost_btn {
+        padding: 10px 10% 10px 10px;
+    }
+
+    .poster_avatar {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .addpost_btn {
+        padding: 10px 5% 10px 10px;
+        font-size: 15px;
+    }
+} */

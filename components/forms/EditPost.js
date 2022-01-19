@@ -6,15 +6,14 @@ import {
 import {
     Modal
 } from "react-bootstrap"
-// import styles from "../../styles/HomePage.module.css"
-import styles from "../../styles/AddPost.module.css"
 import {
-    // IconButton,
     TextField,
 } from '@mui/material';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
 
-function AddPost() {
+function EditPost() {
     // MODAL
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -62,27 +61,21 @@ function AddPost() {
     }
 
     return (
-        <>
-            <div className="my-5">
-                <a href="/">
-                    <img src="euzhean.jpg" className="avatar_style_3" />
-                </a>
-
-                <button className={styles.addpost_btn} onClick={handleShow}>
-                    What's on your mind, Eu Zhean?
-                </button>
-            </div>
+        <>  
+            <IconButton onClick={handleShow}>
+                <EditIcon/>
+            </IconButton>
 
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title><h3>Add Post</h3></Modal.Title>
+                    <Modal.Title><h3>Edit Post</h3></Modal.Title>
                 </Modal.Header>
                     <form onSubmit={onSubmitHandler} id="addPost">
                 <Modal.Body>
                         <div className="d-flex align-items-start">
                             <TextField 
                             id="standard-required"
-                            label="What's on your mind?"
+                            label="Default to the previous values here or smt"
                             size="small" 
                             name="post" 
                             onChange={onChangeHandler}
@@ -98,7 +91,7 @@ function AddPost() {
                 </Modal.Body>
                 <Modal.Footer>
                         <button className="custom_btn_2" type="submit" form="addPost">
-                            Submit
+                            Save Changes
                         </button>
                 </Modal.Footer>
                     </form>
@@ -107,4 +100,4 @@ function AddPost() {
     )
 }
 
-export default AddPost
+export default EditPost

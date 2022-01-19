@@ -1,0 +1,13 @@
+/* RESIZING NAVBAR LOGO */
+.navbar_logo {
+    height: 50px;
+    padding-bottom: 3px;
+}
+
+
+/* CHANGING NAVBAR COLORS */
+.navbar_color {
+    background-color: var(--linen);
+    color: var(--dimgray);
+    box-shadow: none;
+}

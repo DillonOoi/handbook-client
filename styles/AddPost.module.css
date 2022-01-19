@@ -1,0 +1,90 @@
+/* ADD POST */
+.addpost_btn {
+    background-color: var(--peru_light);
+    border: none;
+    color: var(--dimgray);
+    padding: 10px 70% 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 25px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+}
+
+.addpost_btn:hover {
+    transition: 0.3s;
+    background-color: var(--peru);
+    color: var(--linen);
+}
+
+/* MEDIA QUERY */
+@media only screen and (max-width: 1520px) {
+    .addpost_btn {
+        padding: 10px 60% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .addpost_btn {
+        padding: 10px 50% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 1026px) {
+    .addpost_btn {
+        padding: 10px 40% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 968px) {
+    .addpost_btn {
+        padding: 10px 30% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 834px) {
+    .addpost_btn {
+        padding: 10px 20% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .friends_list {
+        display: none;
+    }
+    
+    .addpost_btn {
+        padding: 10px 40% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 645px) {
+    .addpost_btn {
+        padding: 10px 30% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 556px) {
+    .addpost_btn {
+        padding: 10px 20% 10px 20px;
+    }
+}
+
+@media only screen and (max-width: 489px) {
+    .addpost_btn {
+        padding: 10px 10% 10px 10px;
+    }
+}
+
+@media only screen and (max-width: 427px) {
+    .addpost_btn {
+        padding: 10px 5% 10px 10px;
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .addpost_btn {
+        padding: 10px 5% 10px 10px;
+        font-size: 15px;
+    }
+}

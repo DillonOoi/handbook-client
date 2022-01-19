@@ -1,7 +1,7 @@
-import AddPost from './forms/AddPost'
+import Post from "./Post"
 
 function Posts() {
-    <AddPost/>
+
 }
 
 export default Posts

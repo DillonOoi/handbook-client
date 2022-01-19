@@ -1,12 +1,22 @@
+/* MISCELLANEOUS */
+:root {
+  --linen: #eeede8;
+  --dimgray: #656c74;
+  --peru: #a48048;
+  --darkslategray: #333;
+  --transparent: rgba(0, 0, 0, 0);
+  /* --dimgray_light: #656c7438; */
+  --peru_light: #a4814811;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--linen)!important;
 }
 
-a {
+a {  /* FOR SOME REASON, THIS DOESN'T WORK */
   color: inherit;
   text-decoration: none;
 }
@@ -14,3 +24,152 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+/* TEXT */
+h1, h2, h3, h4, h5, h6, p {
+  color: var(--dimgray);
+  font-family: 'Ubuntu', sans-serif;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.custom_anchor {
+  text-decoration: none;
+  color: var(--dimgray);
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.custom_anchor:hover {
+  transition: 0.3s;
+  color: var(--peru);
+}
+
+
+/* BUTTONS */
+.custom_btn_1, .custom_btn_2 {
+  background-color: var(--darkslategray);
+  border: 1px solid;
+  color: var(--linen);
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 25px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.custom_btn_2 {
+  background-color: var(--peru);
+}
+
+.custom_btn_1:hover, .custom_btn_2:hover {
+  background-color: var(--linen);
+  transition: 0.3s;
+  color: var(--dimgray);
+  border: 1px solid var(--dimgray);
+}
+
+.custom_file_upload {
+  cursor: pointer;
+}
+
+.custom_icon_button {
+  color: var(--dimgray);
+  padding: 10px 12px 10px 12px;
+}
+
+.custom_icon_button:hover {
+  border-radius: 50%;
+  background-color: lightgray;
+  padding: 10px 12px 10px 12px;
+}
+
+.custom_icon_large {
+  font-size: 26px;
+}
+
+
+/* MODALS */
+.modal-content {
+  background-color: var(--linen)!important;
+  border: none!important;
+}
+
+
+/* CARDS */
+.card {
+  background: var(--peru_light)!important;
+  border: none!important;
+  border-radius: 25px!important;
+}
+
+.card-img {
+  max-height: 40vh;
+  object-fit: cover;
+  object-position: top;
+}
+
+
+/* AVATAR */
+.avatar_style_2, .avatar_style_1, .avatar_style_3 {
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.avatar_style_1 {
+  height: 25px;
+  width: 25px;
+}
+
+.avatar_style_2 {
+  height: 35px;
+  width: 35px;
+}
+
+.avatar_style_3 {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+  margin-bottom: 3px;
+}
+
+@media only screen and (max-width: 489px) {
+  .avatar_style_3 {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+  }
+}
+
+
+/* POST */
+/* .post_card {
+  background-color: var(--peru_light);
+  border-radius: 25px;
+}
+
+.post_img {
+  width: 100%;
+  overflow: hidden;
+  min-height: 350px;
+  height: 40vh;
+}
+
+.img_container {
+  width: 100%;
+  overflow: hidden;
+  height: 40vh;
+  border-radius: 5px;
+  min-height: 100px;
+  min-width: 100px;
+}
+
+@media only screen and (min-width: 992px) {
+  .post_img {
+    width: 100%;
+  }
+} */
