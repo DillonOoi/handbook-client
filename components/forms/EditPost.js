@@ -13,89 +13,114 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 
-function EditPost() {
-    // MODAL
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+function EditPost({post, GETPOSTS, setEditing}) {
+    console.log(setEditing)
 
-    // ADD POST
-    const [thePost, setThePost] = useState({
-        author: "61dce5d32474905b51e7e608",
-        img: null
+    // MODAL
+    const [showEditModal, setShowEditModal] = useState(false);
+    const handleCloseEditModal = () => setShowEditModal(false);
+    const handleShowEditModal = () => setShowEditModal(true);
+
+    // EDIT POST
+    let [editedPost, setEditedPost] = useState({
+        id: post.id,
+        post: post.post,
+        img: post.img.url
     })
 
-    const onChangeHandler = (e) => {
-        setThePost({...thePost, [e.target.name]: e.target.value})
-    }
-
-    const photoHandler = (e) => {
-        setThePost({...thePost, img: e.target.files[0]})
-    }
-
-    const ADD_POST = gql`
-        mutation addPost(
-            $post: String!, 
-            $author: String!, 
-            $img: Upload,
-            ) {
-            addPost(thePost: {
-                post: $post,
-                author: $author,
-                img: $img
-            }) {
-                post
-                author
+    const EDITPOST = gql`
+        mutation EditPost($thePost: editPostInput) {
+            editPost(thePost: $thePost) {
+            id
+            uploadTime
+            post
+            author
+            img {
+                url
+            }
+            status
             }
         }
     `
 
-    const [addPost, {data, loading, error}] = useMutation(ADD_POST)
+    const [editPost, {data, loading, error}] = useMutation(EDITPOST, {
+        refetchQueries: [{ query: GETPOSTS }]
+    })
 
-    const onSubmitHandler = e => {
+    const onChangeHandler = e => {
+        setEditedPost({...editedPost, [e.target.name]: e.target.value})
+    }
+    const photoHandler = (e) => {
+        setEditedPost({...editedPost, img: e.target.files[0]})
+    }
+
+    const onSubmitHandler = (e, id) => {
         e.preventDefault()
-        addPost({
-            variables: thePost
+        editPost({ 
+            variables: editedPost 
         })
-        handleClose()
+        setEditing(false)
+        handleCloseEditModal()
     }
 
     return (
         <>  
-            <IconButton onClick={handleShow}>
+            <IconButton onClick={handleShowEditModal}>
                 <EditIcon/>
             </IconButton>
 
-            <Modal show={show} onHide={handleClose} centered>
+            <Modal show={showEditModal} onHide={handleCloseEditModal} centered>
                 <Modal.Header closeButton>
                     <Modal.Title><h3>Edit Post</h3></Modal.Title>
                 </Modal.Header>
-                    <form onSubmit={onSubmitHandler} id="addPost">
-                <Modal.Body>
-                        <div className="d-flex align-items-start">
-                            <TextField 
-                            id="standard-required"
-                            label="Default to the previous values here or smt"
-                            size="small" 
-                            name="post" 
-                            onChange={onChangeHandler}
-                            fullWidth="true"
-                            multiline="true"
-                            className="mt-1"
-                            />
-                            <label className="custom_file_upload custom_icon_button ms-3">
-                                <input type="file" style={{display: "none"}} onChange={photoHandler} />
-                                    <InsertPhotoIcon className="custom_icon_large"/>
-                            </label>
-                        </div>
-                </Modal.Body>
-                <Modal.Footer>
-                        <button className="custom_btn_2" type="submit" form="addPost">
-                            Save Changes
-                        </button>
-                </Modal.Footer>
+                    <form onSubmit={(e) => onSubmitHandler(e, post.id)} id="editPost">
+                        <Modal.Body>
+                                <div className="d-flex align-items-start">
+                                    <TextField 
+                                    id="standard-required"
+                                    label={post.post}
+                                    size="small" 
+                                    name="post" 
+                                    onChange={onChangeHandler}
+                                    fullWidth="true"
+                                    multiline="true"
+                                    className="mt-1"
+                                    />
+                                    <label className="custom_file_upload custom_icon_button ms-3">
+                                        <input type="file" style={{display: "none"}} onChange={photoHandler} />
+                                            <InsertPhotoIcon className="custom_icon_large"/>
+                                    </label>
+                                </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                                <button className="custom_btn_2" type="submit" form="editPost">
+                                    Save Changes
+                                </button>
+                        </Modal.Footer>
                     </form>
             </Modal>
+            
+            {/* <form onSubmit={(e) => onSubmitHandler(e, post.id)} id="editPost">
+                <div className="d-flex align-items-start">
+                    <TextField 
+                    id="standard-required"
+                    label={post.post}
+                    size="small" 
+                    name="post" 
+                    onChange={onChangeHandler}
+                    fullWidth="true"
+                    multiline="true"
+                    className="mt-1"
+                    />
+                    <label className="custom_file_upload custom_icon_button ms-3">
+                        <input type="file" style={{display: "none"}} onChange={photoHandler} />
+                            <InsertPhotoIcon className="custom_icon_large"/>
+                    </label>
+                </div>
+                <button className="custom_btn_2" type="submit" form="editPost">
+                    Save Changes
+                </button>
+            </form> */}
         </>
     )
 }

@@ -1,7 +1,8 @@
 import { useState } from "react"
 import {
     gql,
-    useMutation
+    useMutation,
+    useQuery
 } from "@apollo/client"
 import {
     Modal
@@ -14,7 +15,7 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
 
-function AddPost({pfp, name, uid}) {
+function AddPost({pfp, name, uid, refetch}) {
     // MODAL
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -57,7 +58,10 @@ function AddPost({pfp, name, uid}) {
         e.preventDefault()
         addPost({
             variables: thePost
-        })
+        })    
+
+        refetch()
+
         handleClose()
     }
 

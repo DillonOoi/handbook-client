@@ -141,7 +141,13 @@ function TopNav() {
     >
 
       <div className="d-flex align-items-center mx-4 my-3 mb-4">
-        <a onClick={() => router.replace(`/${uid}`)} className="custom_anchor d-flex align-items-center">
+        <a 
+          onClick={() => 
+            
+            router.replace(`/${uid}`)    
+          } 
+          className="custom_anchor d-flex align-items-center"
+        >
           {
             pfp ?
               <img 
@@ -156,7 +162,7 @@ function TopNav() {
       </div>
 
       <div className="mx-4 my-3 mb-3">
-        <a className=" custom_anchor">
+        <a onClick={() => router.replace('/')} className="custom_anchor">
           <p className='m-0'>Log Out</p>
         </a>
       </div>

@@ -17,6 +17,7 @@ import {
 } from "@apollo/client"
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Posts from "../components/Posts";
+import Post from "../components/Post";
 
 
 function Profile() {
@@ -28,10 +29,11 @@ function Profile() {
 
     // YOUR OWN DATA
     const [user, setUser] = useState(typeof window !== 'undefined'? JSON.parse(localStorage.getItem('userdata')) : null)
-    const [userData, setUserData] = useState({})
-    const [posts, setPosts] = useState([])
     // YOUR OWN ID
     const [mid, setMid] = useState(user ? user._id : null)
+    
+    const [userData, setUserData] = useState({})
+    const [posts, setPosts] = useState([])
     
     
     let GETUSER = gql`
@@ -98,6 +100,10 @@ function Profile() {
 
     }, [loading, pLoading])
 
+    let showPosts = loading ? <h1>Loading...</h1> : 
+	posts.map(post => 
+		<Post key={post.id} post={post} GETURPOSTS={GETURPOSTS}/>
+	)
 
     // ADD FRIEND 
     let addFriendHandler = () => {
@@ -172,7 +178,7 @@ function Profile() {
                     </Col>
                     <Col md="8">
                         <h4 className="text-center">Posts</h4>
-                        <Posts/>
+                        {showPosts}
                     </Col>
                 </Row>
 

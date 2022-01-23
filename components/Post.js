@@ -20,18 +20,27 @@ import {
 import styles from "../styles/Post.module.css";
 import {
     useQuery, 
-    gql
+    gql,
+    useMutation
 } from "@apollo/client";
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Post({post, GETPOSTS}) {
-    // MODAL
+    // MODALS
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const handleCloseEditModal = () => setShowEditModal(false);
+    const handleShowEditModal = () => setShowEditModal(true);
 
-    // GET USER INFO BY ID FOR ADDITIONAL POST DETAILS
+    // GET LOGGED-IN USER'S DATA
+    const [myData, setMyData] = useState(typeof window !== 'undefined'? JSON.parse(localStorage.getItem('userdata')) : null)    
+    // GET EVERY USER'S INFO BY ID FOR ADDITIONAL POST DETAILS
     const [userData, setUserData] = useState({})
+    // CHECK IF A POST IS YOURS
+    const [myPost, setMyPost] = useState(false)
 
     let GETUSER = gql`
         query GetUser($id: ID) {
@@ -50,13 +59,55 @@ function Post({post, GETPOSTS}) {
         }
     })
 
-    useEffect(() => {
-        if(!loading) setUserData(data.getUser)
+    useEffect(() => {   
+
+        if(myData.id === userData.id) {
+            setMyPost(true)
+        }    
+
+        if(!loading) setUserData(data.getUser) 
+
     }, [loading])
 
+
+    // EDIT POST
+    const [editing, setEditing] = useState(false)
+
+    // DELETE POST
+    const DELETEPOST = gql`
+        mutation DeletePost($deletePostId: ID) {
+            deletePost(id: $deletePostId) {
+            id
+            uploadTime
+            post
+            author
+            img {
+                url
+            }
+            status
+            }
+        }
+    `
+    const [deletePost, {data: deleteData, loading: loadingDelete, error: deleteError}] = useMutation(DELETEPOST, {
+        refetchQueries: [
+            {query: GETPOSTS}
+        ]
+    })
+
+    const deleteHandler = id => {
+        if(window.confirm("Are you sure you want to delete this post?")) {
+            deletePost({
+                variables: {id}
+            })
+        }
+    }
+
+
     // console.log(userData)
+    // console.log(myData)
     // console.log(post.author)
     // console.log(post.img)
+    // console.log(myPost)
 
     return(
         <>
@@ -76,7 +127,7 @@ function Post({post, GETPOSTS}) {
                                 } 
                             </a>
                             <div className="text-start">
-                                <a href="/" className="custom_anchor">{userData.name}</a>
+                                <a href={`/${userData.id}`} className="custom_anchor">{userData.name}</a>
                                 <br></br>
                                 <p className="custom_smaller_font">
                                     {post.uploadTime}
@@ -84,9 +135,37 @@ function Post({post, GETPOSTS}) {
                             </div>
                         </div>
                         <div>
-                            <EditPost />
+                            {/* {
+                                myPost ?
+                                <>
+                                    <EditPost />
 
-                            <IconButton>
+                                    <IconButton>
+                                        <DeleteIcon/>
+                                    </IconButton>
+                                </>
+                                :
+                                <></>
+                            } */}
+
+                            {/* <IconButton onClick={handleShowEditModal}>
+                                <EditIcon onClick={() => setEditing(!editing)}/>
+                            </IconButton>
+
+                            <Modal show={showEditModal} onHide={handleCloseEditModal} centered>
+                                <Modal.Header closeButton>
+                                    <Modal.Title><h3>Edit Post</h3></Modal.Title>
+                                </Modal.Header>
+                                    <Modal.Body>
+                                            <EditPost post={post} GETPOSTS={GETPOSTS} setEditing={setEditing}/>
+                                    </Modal.Body>
+                            </Modal> */}
+
+                            <EditPost 
+                                onClick={() => setEditing(!editing)}
+                                post={post} GETPOSTS={GETPOSTS} setEditing={setEditing}
+                            />
+                            <IconButton onClick={() => deleteHandler(post.id)}>
                                 <DeleteIcon/>
                             </IconButton>
                         </div>

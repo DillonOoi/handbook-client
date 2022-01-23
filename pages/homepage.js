@@ -6,10 +6,13 @@ import {
     Col
 } from "react-bootstrap"
 import styles from "../styles/HomePage.module.css"
-import Post from "../components/Post";
 import Posts from "../components/Posts";
 import { useState, useEffect } from "react";
 import {useRouter} from 'next/router'
+import {
+    gql,
+    useQuery
+} from "@apollo/client"
 
 export async function getStaticProps() {
     return {
@@ -20,7 +23,32 @@ export async function getStaticProps() {
 
 function HomePage() {
 
+    // REDIRECTING TO OTHER PAGES
     const router = useRouter()
+
+    // FOR ADDPOST.JS TO HELP US NOT HAVE TO RELOAD TO SEE NEW POSTS
+    let GETPOSTS = gql`
+        query GetPosts {
+            getPosts {
+            id
+            uploadTime
+            post
+            author
+            img {
+                url
+                filename
+                mimetype
+                encoding
+            }
+            status
+            }
+        }
+    `
+    const {loading, error, data, refetch} = useQuery(GETPOSTS)
+    const [posts, setPosts] = useState([])
+    useEffect(() => {
+		if(!loading) setPosts(data.getPosts)
+	}, [posts, data])
     
     // LOGGED-IN USER'S PROFILE PIC, NAME, & ID
     const [pfp, setPfp] = useState(typeof window !== 'undefined'? JSON.parse(localStorage.getItem('userdata')).pfp : null)
@@ -36,11 +64,11 @@ function HomePage() {
                 <Row className="mt-5 pt-4">
                     <Col xl="10" lg="9" md="8">
 
-                        <AddPost pfp={pfp} name={name} uid={uid} />
+                        <AddPost pfp={pfp} name={name} uid={uid} refetch={refetch}/>
                         
                         <Row className="justify-content-center">
                             <Col xl="6" lg="7" md="8" sm="9" xs="11" className="">
-                                <Posts />
+                                <Posts posts={posts} loading={loading} GETPOSTS={GETPOSTS}/>
                             </Col>
                         </Row>
 
