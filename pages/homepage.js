@@ -6,18 +6,27 @@ import {
     Col
 } from "react-bootstrap"
 import styles from "../styles/HomePage.module.css"
-
-import EditPost from "../components/forms/EditPost"
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-
 import Post from "../components/Post";
+import Posts from "../components/Posts";
+import { useState, useEffect } from "react";
+import {useRouter} from 'next/router'
 
+export async function getStaticProps() {
+    return {
+        props: {
+        }
+    }
+}
 
 function HomePage() {
+
+    const router = useRouter()
+    
+    // LOGGED-IN USER'S PROFILE PIC, NAME, & ID
+    const [pfp, setPfp] = useState(typeof window !== 'undefined'? JSON.parse(localStorage.getItem('userdata')).pfp : null)
+    const [name, setName] = useState(typeof window !== 'undefined'? JSON.parse(localStorage.getItem('userdata')).name : null)
+    const [uid, setUid] = useState(typeof window !== 'undefined'? JSON.parse(localStorage.getItem('userdata'))._id : null)
+
     return(
         <>
             <Container fluid>
@@ -27,89 +36,13 @@ function HomePage() {
                 <Row className="mt-5 pt-4">
                     <Col xl="10" lg="9" md="8">
 
-                        <AddPost />
-
-                        <Post />
-
-                        {/* <Row className="justify-content-center mb-5">
-                            <Col xl="6" lg="7" md="8" sm="9" xs="11" className="post_card">
-                                <div className="my-4">
-                                    <div className="d-flex justify-content-between">
-                                        <a href="/" className="custom_anchor d-flex align-items-center">
-                                            <img src="dillon.png" className="avatar_style_3" />
-                                            <div className="text-start">
-                                                Dillon Ooi
-                                                <br></br>
-                                                <small>
-                                                    Wed, 14 Jun 2017 07:00:00 GMT
-                                                </small>
-                                            </div>
-                                        </a>
-                                        <div>
-                                            <EditPost />
-
-                                            <IconButton>
-                                                <DeleteIcon/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <p className="my-3">god, i hate my life</p>
-                                    <div className="d-flex justify-content-center">
-                                        <div className="img_container">
-                                            <img src="xiao.png" className="post_img img-fluid"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="mb-4">
-                                    <IconButton>
-                                        <ThumbUpOffAltIcon/>
-                                    </IconButton>
-                                    <IconButton>
-                                        <ChatBubbleOutlineIcon/>
-                                    </IconButton>
-                                </div>
+                        <AddPost pfp={pfp} name={name} uid={uid} />
+                        
+                        <Row className="justify-content-center">
+                            <Col xl="6" lg="7" md="8" sm="9" xs="11" className="">
+                                <Posts />
                             </Col>
-                        </Row>     */}
-
-                        {/* <Row className="justify-content-center mb-5">
-                            <Col xl="6" lg="7" md="8" sm="9" xs="11" className="post_card">
-                                <div className="my-4">
-                                    <div className="d-flex justify-content-between">
-                                        <a href="/" className="custom_anchor d-flex align-items-center">
-                                            <img src="dillon.png" className="avatar_style_3" />
-                                            <div className="text-start">
-                                                Dillon Ooi
-                                                <br></br>
-                                                <small>
-                                                    Wed, 14 Jun 2017 07:00:00 GMT
-                                                </small>
-                                            </div>
-                                        </a>
-                                        <div>
-                                            <EditPost/>
-
-                                            <IconButton>
-                                                <DeleteIcon/>
-                                            </IconButton>
-                                        </div>
-                                    </div>
-                                    <p className="my-3">god, i hate my life</p>
-                                    <div className="d-flex justify-content-center">
-                                        <div className="img_container">
-                                            <img src="dillon.png" className="post_img img-fluid"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="mb-4">
-                                    <IconButton>
-                                        <ThumbUpOffAltIcon/>
-                                    </IconButton>
-                                    <IconButton>
-                                        <ChatBubbleOutlineIcon/>
-                                    </IconButton>
-                                </div>
-                            </Col>
-                        </Row> */}
+                        </Row>
 
                     </Col>
 

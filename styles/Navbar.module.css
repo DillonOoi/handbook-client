@@ -8,6 +8,7 @@
 /* CHANGING NAVBAR COLORS */
 .navbar_color {
     background-color: var(--linen);
+    /* background-color: #3fc8b4; */
     color: var(--dimgray);
     box-shadow: none;
 }

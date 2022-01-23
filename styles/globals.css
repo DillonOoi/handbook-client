@@ -45,26 +45,40 @@ p {
 .custom_anchor:hover {
   transition: 0.3s;
   color: var(--peru);
+  cursor: pointer;
+}
+
+.custom_smaller_font {
+  font-size: smaller;
+  margin-bottom: 0;
 }
 
 
 /* BUTTONS */
-.custom_btn_1, .custom_btn_2 {
+.custom_btn_1, .custom_btn_2, .custom_btn_3, .custom_btn_4 {
   background-color: var(--darkslategray);
   border: 1px solid;
   color: var(--linen);
-  padding: 10px 20px 10px 20px;
   text-decoration: none;
   display: inline-block;
   border-radius: 25px;
   font-family: 'Ubuntu', sans-serif;
 }
 
-.custom_btn_2 {
+.custom_btn_1, .custom_btn_2 {
+  padding: 10px 20px 10px 20px;
+}
+
+.custom_btn_3, .custom_btn_4 {
+  padding: 7px 15px 7px 15px;
+  font-size: 15px;
+}
+
+.custom_btn_2, .custom_btn_4 {
   background-color: var(--peru);
 }
 
-.custom_btn_1:hover, .custom_btn_2:hover {
+.custom_btn_1:hover, .custom_btn_2:hover, .custom_btn_3:hover, .custom_btn_4:hover {
   background-color: var(--linen);
   transition: 0.3s;
   color: var(--dimgray);
@@ -111,9 +125,19 @@ p {
   object-position: top;
 }
 
+/* .card-footer {
+  background: var(--transparent)!important;
+} */
+
+
+/* TABS */
+.nav-pills .nav-link.active {
+  background-color: var(--peru_light)!important;
+}
+
 
 /* AVATAR */
-.avatar_style_2, .avatar_style_1, .avatar_style_3 {
+.avatar_style_2, .avatar_style_1, .avatar_style_3, .avatar_style_4 {
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
@@ -136,6 +160,11 @@ p {
   margin-bottom: 3px;
 }
 
+.avatar_style_4 {
+  height: 170px;
+  width: 170px;
+}
+
 @media only screen and (max-width: 489px) {
   .avatar_style_3 {
       height: 40px;
@@ -144,32 +173,3 @@ p {
       margin-right: 10px;
   }
 }
-
-
-/* POST */
-/* .post_card {
-  background-color: var(--peru_light);
-  border-radius: 25px;
-}
-
-.post_img {
-  width: 100%;
-  overflow: hidden;
-  min-height: 350px;
-  height: 40vh;
-}
-
-.img_container {
-  width: 100%;
-  overflow: hidden;
-  height: 40vh;
-  border-radius: 5px;
-  min-height: 100px;
-  min-width: 100px;
-}
-
-@media only screen and (min-width: 992px) {
-  .post_img {
-    width: 100%;
-  }
-} */

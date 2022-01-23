@@ -6,15 +6,15 @@ import {
 import {
     Modal
 } from "react-bootstrap"
-// import styles from "../../styles/HomePage.module.css"
 import styles from "../../styles/AddPost.module.css"
 import {
-    // IconButton,
     TextField,
 } from '@mui/material';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
-function AddPost() {
+
+function AddPost({pfp, name, uid}) {
     // MODAL
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -22,8 +22,8 @@ function AddPost() {
 
     // ADD POST
     const [thePost, setThePost] = useState({
-        author: "61dce5d32474905b51e7e608",
-        img: null
+        author: uid,
+        // img: null
     })
 
     const onChangeHandler = (e) => {
@@ -64,12 +64,20 @@ function AddPost() {
     return (
         <>
             <div className="my-5">
-                <a href="/">
-                    <img src="euzhean.jpg" className="avatar_style_3" />
-                </a>
+                <a href={`/${uid}`} >
+                    {
+                        pfp ?
+                        <img 
+                        src={pfp} 
+                        className="avatar_style_3">
+                        </img>
+                        :
+                        <AccountCircle className="avatar_style_3 custom_anchor"/>
+                    }
+                </a> 
 
                 <button className={styles.addpost_btn} onClick={handleShow}>
-                    What's on your mind, Eu Zhean?
+                    What's on your mind, {name}?
                 </button>
             </div>
 

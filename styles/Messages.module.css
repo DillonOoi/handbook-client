@@ -1,0 +1,33 @@
+/* MISCELLANEOUS */
+.maximum_height {
+    height: 83vh;
+}
+
+
+/* MESSAGES' BACKGROUND-COLORS */
+.friend_message, .my_message {
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.friend_message {
+    background-color: var(--peru_light);
+}
+
+.my_message {
+    background-color: var(--peru);
+    color: var(--linen);
+}
+
+/* MESSAGES' TEXT FIELD */
+.messages_textfield {
+    width: 90%;
+    /* position */
+    /* height: 1px; */
+    /* position: absolute; */
+}
+
+#testing {
+    height: 100%;
+    /* display: flex; */
+}

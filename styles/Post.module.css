@@ -1,0 +1,52 @@
+/* SINGLE POST */
+.custom_modal_size {
+    min-width: 90%;
+    padding-top: 60px;
+}
+  
+.single_post_img {
+    width: 100%;
+    /* min-height: 50vh; */
+    max-height: 94vh;
+}
+  
+/* .post_card {
+  background-color: var(--peru_light);
+  border-radius: 25px;
+}
+
+.post_img {
+  width: 100%;
+  overflow: hidden;
+  min-height: 350px;
+  height: 40vh;
+}
+
+.img_container {
+  width: 100%;
+  overflow: hidden;
+  height: 40vh;
+  border-radius: 5px;
+  min-height: 100px;
+  min-width: 100px;
+}
+
+@media only screen and (min-width: 992px) {
+  .post_img {
+    width: 100%;
+  }
+} */
+
+
+/* COMMENTS */
+.comments_scroll {
+    overflow-y: scroll;
+    height: 70vh;
+}
+
+/* .comments_time {
+  font-size: smaller;
+  margin-bottom: 0;
+} */
+
+
